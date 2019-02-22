@@ -24,6 +24,8 @@ class AttendancesController < ApplicationController
   # POST /attendances
   # POST /attendances.json
   def create
+
+    
     @attendance = Attendance.new(attendance_params)
 
     respond_to do |format|
