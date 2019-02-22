@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   end
   resources :attendances
   resources :events
+	get "/events/:id/subscribe" => "events#subscribe" 
 	resources :charges
+
 	
 end

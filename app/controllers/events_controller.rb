@@ -63,6 +63,36 @@ class EventsController < ApplicationController
     end
   end
 
+  def subscribe
+    @event = Event.find(params[:id])
+    @attendance = Attendance.new
+
+    @amount = @event.price * 100
+
+    customer = Stripe::Customer.create(
+      :email => params[:stripeEmail],
+      :source  => params[:stripeToken]
+    )
+
+    charge = Stripe::Charge.create(
+      :customer    => customer.id,
+      :amount      => @amount,
+      :description => @event.description,
+      :currency    => 'eur'
+    )
+
+    @attendance.guest_id = current_user.id
+    @attendance.event_id = @event.id
+    @attendance.stripe_customer_id = params[:stripeToken]
+
+    @attendance.save
+
+  rescue Stripe::CardError => e
+    flash[:error] = e.message
+    redirect_to events_path
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event

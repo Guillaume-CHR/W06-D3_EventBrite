@@ -25,9 +25,6 @@ class AttendancesController < ApplicationController
   # POST /attendances.json
   def create
 
-    
-    @attendance = Attendance.new(attendance_params)
-
     respond_to do |format|
       if @attendance.save
         format.html { redirect_to @attendance, notice: 'Attendance was successfully created.' }
@@ -71,6 +68,6 @@ class AttendancesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def attendance_params
-      params.require(:attendance).permit(:guest_id, :event_id, :stripe_customer_id)
+      params.require(:attendance).permit(:event_id, :stripe_customer_id)
     end
 end
