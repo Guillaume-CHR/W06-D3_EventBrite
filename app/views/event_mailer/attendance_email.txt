@@ -1,0 +1,8 @@
+Salut <%= @admin.first_name %>
+==========================================================
+ 
+<%= @guest.first_name + ' ' + @guest.last_name %> has register to your event: <%= @event.title %>
+ 
+Pour accéder à ton espace client, connecte-toi via : <%= @url %>.
+ 
+À très vite sur monsite.fr !

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html style="overflow-x:hidden;">
+  <!-- ********************************************************************************************* -->
+  <!-- ***************************** Define the metadata of the website **************************** -->
+  <!-- ********************************************************************************************* -->
+  <head>
+      <meta charset="utf-8" />                        <!-- ALl special chars -->
+      <link href="goo.gl/361Vei" rel="stylesheet" type="text/css">      <!-- CSS File from BootStrap-->
+      <link href="https://bootswatch.com/4/flatly/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+      
+      <%= csrf_meta_tags %>
+      <%= csp_meta_tag %>
+      
+      <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+      
+      <link rel="icon" href="favicon.png" />                  <!-- Small icon in tab -->
+      <title>TheDrinker</title>
+      <meta name="description" content="">
+      <meta name="keywords" content="">
+      <meta name="author" content="Guillaume CHRISTE">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <a class="navbar-brand" style="margin-left: 16px;font-size:1.5em;" href="<%= root_path %>">The Drinker</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <%= link_to "Home", root_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Create Event", new_event_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Events", events_path, class: "nav-link" %>
+          </li>
+        </ul>
+        <div class="form-inline my-2 my-lg-0">
+          <% if user_signed_in? %>
+            <div class="btn-group">
+              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <%= current_user.username %>
+              </button>
+              <div class="dropdown-menu">
+                <%= link_to "My Profile",  my_profile_path, class: "dropdown-item my-2 my-sm-0" %>
+
+              </div>
+            </div>
+            <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-outline-danger my-2 my-sm-0" %>
+          
+          <% else %>
+            <%= form_for(:user, :url => session_path(:user)) do |f| %>
+              <%= f.text_field :signin, autofocus: true, autocomplete: "email", class: "form-control mr-sm-2", placeholder: "Login" %>
+              <%= f.password_field :password, autocomplete: "current-password", class: "form-control mr-sm-2", placeholder: "Password" %>
+              <% if devise_mapping.rememberable? %>
+                <%= f.check_box :remember_me %> Remember me
+              <% end %>
+              <%= f.submit "Log in", class: "btn btn-success my-2 my-sm-0"%>
+              <%= link_to "Forgot your password?", new_password_path(:user) %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </nav>
+
+    <%= yield %>
+    
+    <footer class="pt-4 border-top" style="margin:0 !important">
+      <div class="row">
+        <div class="col-md-7 p-0 b-0">
+        </div>
+        <div class="col-md-5 px-5 py-3">
+          <small class="d-block text-muted">&copy;Designed by:</small>
+          <p class="d-block m-0">Guillaume CHRISTE</p>
+          <small class="d-block text-muted">2019</small>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>
+<!-- 
+https://media.giphy.com/media/gY5rfsZ5ODelG/giphy.gif
+https://media.giphy.com/media/3oEjHEPaDX25ZMiH16/giphy.gif
+https://media.giphy.com/media/ermcThLVYybcs/giphy.gif -->

@@ -1,0 +1,28 @@
+<div class="card mt-4 shadow-sm">
+  <!-- <img class="card-img-top" src="https://cdn0.tnwcdn.com/wp-content/blogs.dir/1/files/2015/04/gossip-730x344.jpg" alt="Card image cap"> -->
+  <div class="card-header bg-defaut">
+    <h4 class="my-0 font-weight-normal">Event <%= event.id %>: <strong><%= event.title %></strong></h4>
+  </div>
+  <% if current_page?(controller: 'events', action: 'index') %>
+    <img class="card-img-top" src="https://media.giphy.com/media/ermcThLVYybcs/giphy.gif" alt="Card image cap">
+  <% end %>
+  <div class="card-body">
+    <ul class="list-unstyled mt-3 mb-4">
+      <li class="text-justify"><%= event.description.slice(0..iSlice) %>...</li>
+      <li class="text-right">
+        <h6>Admin: <strong><%= (User.find(event.admin_id).first_name + ' ' + User.find(event.admin_id).last_name.upcase) %></strong></h6>
+        <h6>Price: <strong><%= event.price %> €</strong></h6>
+        <h6>Start date: <strong><%= event.start_date %></strong></h6>
+        <h6>Duration: <strong><%= event.duration %> minutes</strong></h6>
+      </li>
+    </ul>
+    <div class="text-center">
+      <%= link_to 'Show', event %> | 
+      <%= link_to 'Edit', edit_event_path(event) %> | 
+      <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %>
+    </div>
+  </div>
+  <div class="card-footer">
+    <small class="text-muted">Last updated on: <%= event.updated_at %></small>
+  </div>
+</div>

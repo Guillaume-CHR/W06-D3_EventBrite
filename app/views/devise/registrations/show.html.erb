@@ -1,0 +1,31 @@
+<div class="container p-3">
+  <div class="card border-primary mb-3">
+    <div class="card-body">
+      <div class="row justify-content-md-center mb-2">
+        <div class="col">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3B3P-bpvF7KXO7jkM9uHcjRT_BE_86We5v5XDnjx_pQug9qlnvQ" alt="" class="img-rounded img-responsive"/>
+        </div>
+        <div class="col-sm-9">
+          <h3 class="m-0 card-title"><strong><%= @user.first_name + ' ' + @user.last_name.upcase %></strong></h3>
+          <h6 class="m-0"><i class="font-italic">aka </i><strong><%= @user.username %></strong></h6>
+
+          <p class="m-0 small">
+            <%= image_tag "mail.png" %>
+            <a href="mailto:<%= @user.email %>"> <%= @user.email %></a>
+          </p>
+          <br/>
+          <p class="card-text font-italic"><%= @user.description %></p>
+        </div>
+      </div>
+      <div class="row justify-content-md-center text-center">
+        <div class="col-sm-3">
+        	<%= link_to "Edit", edit_user_registration_path, class: "btn btn-outline-info my-2 my-sm-0" %>
+        	<%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger my-2 my-sm-0"  %></p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>

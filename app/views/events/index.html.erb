@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+<div class="container p-3">
+  <%= link_to 'New Event', new_event_path, class: "btn btn-lg btn-success btn-block" %>
+  <% i = 0%>
+  <% ((@events.size)/3 + 1).times do %>
+    <div class="card-deck">
+      <% (@events.order(:id)[i..i+2]).each_with_index do |event, index| %>
+        <%= render 'display', event: event, iSlice: 20 %>
+      <%end%>
+      <% i += 3 %>
+    </div>
+  <%end%> 
+  <br>
+</div>
